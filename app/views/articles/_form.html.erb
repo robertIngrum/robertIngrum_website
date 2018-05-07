@@ -1,0 +1,17 @@
+<%= form_with model: @article, local: true do |form| %>
+  <%= render 'articles/errors' %>
+
+  <p>
+    <%= form.label :title %><br/>
+    <%= form.text_field :title %>
+  </p>
+
+  <p>
+    <%= form.label :text %><br/>
+    <%= form.text_field :text %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

@@ -1,0 +1,13 @@
+AllCops:
+  TargetRubyVersion: 2.4
+  Include:
+    - '**/Rakefile'
+    - '**/config.ru'
+  Exclude:
+    - 'db/**/*/'
+
+Style/Documentation:
+  Enabled: False
+
+Style/FrozenStringLiteralComment:
+  Enabled: False
