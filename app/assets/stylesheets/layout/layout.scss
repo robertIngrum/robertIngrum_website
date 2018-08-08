@@ -1,0 +1,25 @@
+#background {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  z-index: -1;
+}
+
+#content-wrapper {
+  box-sizing: border-box;
+  max-width: 800px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 25px 60px;
+  border-radius: 5px;
+  background: linear-gradient(to right,
+                              rgba(0, 0, 0, 0) 0%,
+                              rgba(0, 0, 0, .1) 7%,
+                              rgba(0, 0, 0, .1) 93%,
+                              rgba(0, 0, 0, 0) 100%);
+  color: white;
+  z-index: 0;
+}
