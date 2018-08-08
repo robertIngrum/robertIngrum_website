@@ -17,9 +17,11 @@
 //= require_tree .
 //= require_self
 
-function drawLine(ctx, offset, maxWidth, maxHeight) {
-  var mod1 = [(maxWidth / 3) + offset,     (maxHeight * 1.3) + -offset];
-  var mod2 = [(2 * maxWidth / 3) + offset, (-maxHeight / 3) + -offset];
+function drawLine(ctx, offset, maxWidth, maxHeight, seed) {
+  offset += seed;
+
+  var mod1 = [(maxWidth / 3) + offset,     ((maxHeight) * 1.3) + -offset];
+  var mod2 = [(2 * maxWidth / 3) + offset, ((-maxHeight) / 3) + -offset];
 
   ctx.beginPath();
   ctx.moveTo(0, 0);
@@ -30,12 +32,16 @@ function drawLine(ctx, offset, maxWidth, maxHeight) {
   ctx.stroke();
 }
 
-$(document).ready(function() {
+function draw() {
   var canvas = document.getElementById('background');
   var ctx    = canvas.getContext('2d');
 
   var maxWidth  = $(window).width();
   var maxHeight = $(window).height();
+
+  var time = new Date();
+  var ms   = time.getSeconds() * 1000 + time.getMilliseconds();
+  var seed = Math.sin(ms / (Math.PI * 300)) * 100;
 
   var gradient = ctx.createLinearGradient(0, 0, maxWidth, maxHeight);
   gradient.addColorStop(0,   'magenta');
@@ -44,12 +50,19 @@ $(document).ready(function() {
 
   canvas.setAttribute('width',  maxWidth);
   canvas.setAttribute('height', maxHeight);
+  ctx.clearRect(0, 0, maxWidth, maxHeight);
 
   ctx.strokeStyle = gradient;
 
-  drawLine(ctx, 0, maxWidth, maxHeight);
+  drawLine(ctx, 0, maxWidth, maxHeight, seed);
   for (var i = 1; i < 30; i++) {
-    drawLine(ctx,   i * 50, maxWidth, maxHeight);
-    drawLine(ctx,  -i * 50, maxWidth, maxHeight);
+    drawLine(ctx,   i * 50, maxWidth, maxHeight, seed);
+    drawLine(ctx,  -i * 50, maxWidth, maxHeight, seed);
   }
+
+  window.requestAnimationFrame(draw);
+}
+
+$(document).ready(function() {
+  window.requestAnimationFrame(draw);
 });
